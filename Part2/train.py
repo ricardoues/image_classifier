@@ -146,8 +146,7 @@ print(f"Test loss: {test_loss/len(testloader):.3f}.. "
 checkpoint = { 'arch' : arch ,
                'state_dict' : model.state_dict(),
                'class_to_idx' : class_to_idx, 
-               'hidden_units': hidden_units, 
-               
+               'hidden_units': hidden_units               
              }
 
 if save_dir.endswith('/'):
