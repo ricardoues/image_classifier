@@ -14,6 +14,9 @@ def build_dl_model(arch, hidden_units):
     from torchvision import datasets, transforms, models   
     import json
     
+    # The output of the classifier, this value depends on the problem.
+    output_classifier = 102 
+    
     if arch == "vgg19":
         model = models.vgg19(pretrained=True)
     elif arch == "resnet18":
@@ -37,12 +40,24 @@ def build_dl_model(arch, hidden_units):
 
     # I tried different architectures and hyperparameters but the 
     # following works well. 
+    
+    # Getting the input size of the classifier
+    counter = 0 
+    input_classifer = 0 
+
+    for each in model.classifier.parameters():
+        if counter == 1:
+            break
+        
+        input_classifier = each.shape[1]
+        counter += 1
+    
 
     classifier = nn.Sequential(OrderedDict([
-                                           ('fc1', nn.Linear(25088, hidden_units)) , 
+                                           ('fc1', nn.Linear(input_classifier, hidden_units)) , 
                                            ('relu1', nn.ReLU()), 
                                            ('dropout1', nn.Dropout(0.4)), 
-                                           ('fc2', nn.Linear(hidden_units, 102)),
+                                           ('fc2', nn.Linear(hidden_units, output_classifier)),
                                            ('output', nn.LogSoftmax(dim=1))
                                            ]))
 

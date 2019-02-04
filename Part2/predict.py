@@ -11,8 +11,6 @@ parser = argparse.ArgumentParser(description='Predicting a flower name from an i
 
 parser.add_argument('path_to_image', action="store")
 parser.add_argument('checkpoint', action="store")
-parser.add_argument('--arch', action="store", dest="arch", default="vgg19")
-parser.add_argument('--hidden_units', action="store", dest="hidden_units", default=1500)
 parser.add_argument('--top_k', action="store", dest="top_k", default=3)
 parser.add_argument('--category_names', action="store", dest="category_names", default="")
 parser.add_argument('--gpu', action="store_true", dest="gpu", default=False)
@@ -22,13 +20,9 @@ results = parser.parse_args()
 
 path_to_image = results.path_to_image
 checkpoint = results.checkpoint
-arch = results.arch
-hidden_units = results.hidden_units
 top_k = results.top_k
 category_names = results.category_names
 gpu = results.gpu
-
-hidden_units = int(float(hidden_units))
 top_k = int(float(top_k))
 
 
@@ -42,7 +36,7 @@ print(message_cuda)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
-model = load_checkpoint(checkpoint, arch, hidden_units)
+model = load_checkpoint(checkpoint)
 
 model.to(device); 
 

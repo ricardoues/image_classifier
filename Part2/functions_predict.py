@@ -3,9 +3,12 @@ from functions_train import build_dl_model
 from PIL import Image
 from utils_predict import process_image 
 
-def load_checkpoint(filepath, arch, hidden_units):
+def load_checkpoint(filepath):
     checkpoint = torch.load(filepath)
     
+    
+    arch = checkpoint['arch']
+    hidden_units = checkpoint['hidden_units']
     model = build_dl_model(arch, hidden_units)
     model.load_state_dict(checkpoint['state_dict'])
     model.class_to_idx = checkpoint['class_to_idx']
