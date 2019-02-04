@@ -18,8 +18,6 @@ First, we will use /home/workspace/ImageClassifier as working directory.
 
 **Example of usage**:
 
-python train.py flowers --arch vgg19 --learning_rate 0.001 --hidden_units 1500 --epochs 5 --gpu
+python train.py flowers --arch alexnet --learning_rate 0.001 --hidden_units 1500 --epochs 2 --gpu
 
-python predict.py flowers/test/100/image_07896.jpg checkpoint.pth --arch vgg19 --hidden_units 1500 --top_k 10 --category_names cat_to_name.json --gpu 
-
-**Note**: I had to add the parameters --arch and --hidden_units in the predict.py Python script.
+python predict.py flowers/test/100/image_07896.jpg checkpoint.pth --top_k 10  --category_names cat_to_name.json   --gpu 
