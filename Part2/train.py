@@ -142,15 +142,6 @@ print(f"Test loss: {test_loss/len(testloader):.3f}.. "
                               
 # TODO: Save the checkpoint 
 
-# Getting the input size of the classifier
-#counter = 0 
-#input_classifer = 0 
-
-#for each in model.classifier.parameters():
-#    if counter == 1:
-#        break
-#    input_classifier = each.shape[1]
-#    counter += 1
 
 checkpoint = { 'arch' : arch ,
                'state_dict' : model.state_dict(),
